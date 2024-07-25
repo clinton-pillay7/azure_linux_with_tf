@@ -103,10 +103,12 @@ resource "azurerm_linux_virtual_machine" "linux-vm" {
     size                  = "Standard_F2"
     admin_username        = "adminuser"
     network_interface_ids = [azurerm_network_interface.linux-nic.id]
+
+    custom_data  = filebase64("${path.module}/templatescript.tpl")
     # Add the file path for the ssh key pair that we generated  
     admin_ssh_key {
         username   = "adminuser"
-        public_key = file("C:\\Users\\Clinton\\azure.pub") # Pass the file path as recorded in previous step
+        public_key = file("~/.ssh/id_rsa.pub") # Pass the file path as recorded in previous step
     }
     os_disk {
         caching              = "ReadWrite"
