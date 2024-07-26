@@ -1,0 +1,15 @@
+version: '3'
+services:
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:latest
+    environment:
+      ACCEPT_EULA: 'Y'
+      SA_PASSWORD: 'yourStrongPassword'
+    ports:
+      - 1433:1433
+  app: 
+    build: .
+    container_name: flaskapp
+    ports: 
+      - "5000:5000"
+    
